@@ -1,0 +1,97 @@
+
+
+   ARMWEAP is a program designed to allow mortals to build and buy their own
+armors and weapons. Without gods assistance.
+
+   The program control everythings: The cost of add on stats, which stats and
+slots allowed, and more... Gods are only requested to monitor usage of swear, profanity 
+words and such. That could be used in object name, descriptions. 
+
+   THIS VERSION RUN AGAINST TBA Mud 2020
+
+   USE THIS CODE AT YOUR OWN RISK. (It's still BETA)
+
+
+
+   Source code patching
+   --------------------
+   patch < armweap.tba2020.patch
+   make
+
+   In MUD installation (execute as implementor)
+   --------------------------------------------
+
+   medit 1270                                              | 1270 build-in <mob vnum> for the armorer
+   2                                                       |
+   Armorer                                                 |
+   3                                                       |
+   The armorer                                             |
+   4                                                       | 
+   The armorer stands here. Type 'list' for help.          |
+   A                                                       |
+   2                                                       |
+   0                                                       |
+   Q                                                       |
+   Y                                                       |
+
+   medit 1271                                              | 1271 build-in <mob vnum> for the blacksmith
+   2                                                       |
+   Blacksmith                                              |
+   3                                                       |
+   The blacksmith                                          |
+   4                                                       |
+   The blacksmith stands here. Type 'list' for help.       |
+   A                                                       |
+   2                                                       |
+   0                                                       |
+   Q                                                       |
+   Y                                                       |
+
+   zedit <room vnum >                                      | configure mobile (armorer) to load in room <room vnum>
+   N                                                       |
+   M                                                       |
+   1270                                                    |
+   1                                                       |
+   Q                                                       |
+   Y                                                       |
+
+   zedit <room vnum>                                       | configure mobile (blacksmith) to load in room <room vnum>
+   N                                                       | Note: don't load both mobile in the same vnum room !
+   M                                                       |
+   1271                                                    |
+   1                                                       |
+   Q                                                       |
+   Y                                                       |
+
+   zedit new 177 17700 17799                               | create zone 177, 178, 179 where object will be created / saved.
+   zedit new 178 17800 17899                               | it's possible to add more zone or modify the list in armweap.c
+   zedit new 179 17900 17999                               | 
+
+   shutdown                                                | a reboot is require otherwise the mobile won't act upon
+                                                           | mobile commands: buy, list, reset, want.
+
+   
+  In MUD testing (as imp/only for testing. the system works for mortal)
+  ---------------------------------------------------------------------
+  login                                                    |
+  goto <room vnum> (armorer)                               | 
+  list                                                     | show the current order
+  list help                                                | show help list
+  list wear                                                | show the available list of bodypart (price)
+  list stat                                                | show the available list of stat (limits, price)
+  want name black sandals                                  | set the object handling name
+  want short a pair of black sandals                       | set the short decription of the object
+  want desc put a nice description here                    | set the long description of the object
+  want wear head                                           | set the bodypart the object goes to
+  want ac 1                                                | set ac to 1
+  want int 2                                               | set an apply int by 2 on the object
+  buy                                                      | buy the object
+                                                           | NOTE: if you don't have enough money: set yourname gold 100000000
+
+  reset                                                    | you can reset an order to the default values anytimes, but after
+                                                           | buy the system will automatically do it. 
+
+(the system is similar for the blacksmith. but there is differents options)
+
+Bob
+castillo7@hotmail.com
